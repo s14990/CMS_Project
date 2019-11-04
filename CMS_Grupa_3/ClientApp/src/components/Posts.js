@@ -3,8 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Player, ControlBar } from 'video-react';
-import "video-react/dist/video-react.css";
 import Show_Post from './Show_Post';
 
 class Posts extends Component {
