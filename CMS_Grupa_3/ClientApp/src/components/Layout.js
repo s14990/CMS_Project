@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 import NavMenu from './NavMenu';
 
 export default props => (
-  <div>
+    <div>
     <NavMenu />
     <Container>
       {props.children}

@@ -20,7 +20,7 @@ export default class NavMenu extends React.Component {
   render () {
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light >
+          <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" color="md" >
           <Container>
             <NavbarBrand tag={Link} to="/">CMS_Grupa_3</NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2" />
@@ -30,7 +30,7 @@ export default class NavMenu extends React.Component {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/all_posts">Posts</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
