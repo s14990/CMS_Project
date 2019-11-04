@@ -9,6 +9,7 @@ import Videos from './components/Videos';
 import Add_Post from './components/Add_Post';
 import Posts from './components/Posts';
 import Show_Post from './components/Show_Post';
+import Test from './components/Test';
 
 export default () => (
     <Layout>
@@ -20,5 +21,6 @@ export default () => (
         <Route path='/all_posts' component={Posts} />
         <Route path='/add_post' component={Add_Post} />
         <Route path='/show_post/:id' component={Show_Post} />
+        <Route path='/test' component={Test} />
     </Layout>
 );
