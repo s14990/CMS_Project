@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ThemeSwitcher from './ThemeSwitcher';
 
 class Test extends Component {
 
@@ -22,7 +23,7 @@ class Test extends Component {
 
               <h2>Text: {this.state.text} , number: {this.state.number}</h2>
               <button onClick={this.testHandler}>Upload</button>
-
+              <p><ThemeSwitcher/></p>
             </div>
         );
     }
