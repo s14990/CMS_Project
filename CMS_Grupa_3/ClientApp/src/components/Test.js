@@ -31,4 +31,4 @@ class Test extends Component {
 
 
 
-export default connect()(Test);
+export default Test;

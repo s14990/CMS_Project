@@ -12,7 +12,8 @@ import Show_Post from './components/Show_Post';
 import Test from './components/Test';
 import SignUp from './components/SignUp';
 
-export default () => (
+
+export default () => ( 
     <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/login' component={Login} />

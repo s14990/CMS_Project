@@ -1,0 +1,35 @@
+.light-mode {
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.25s ease-out;
+}
+.light-mode NavMenu {
+  transition: background-color 0.25s ease-out;
+}
+.dark-mode {
+  background-color: #1a1919;
+  color: #999;
+}
+
+.dark-mode NavMenu {
+  background-color: #163e68;
+}
+
+.toggle-container {
+  display: flex;
+  margin: 0 auto;
+}
+
+.toggle-container > span {
+  font-size: 1.2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-top: 4px;
+  margin-right: 2px;
+}
+
+.toggle-container > span:last-child {
+  margin-top: 5px;
+}
