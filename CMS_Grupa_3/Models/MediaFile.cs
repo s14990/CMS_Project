@@ -17,7 +17,7 @@ namespace CMS_Grupa_3.Models
         public string FileType { get; set; }
         public string FileLink { get; set; }
         public string MediaDescription { get; set; }
-        public DateTime MediaDate { get; set; }
+        public DateTime? MediaDate { get; set; }
         public int UploaderId { get; set; }
 
         public virtual User Uploader { get; set; }

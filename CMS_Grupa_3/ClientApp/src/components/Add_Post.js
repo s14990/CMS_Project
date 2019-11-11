@@ -28,7 +28,7 @@ class Add_Post extends Component {
             },
             body: JSON.stringify({
                 PostHtml: this.state.text,
-                MediaFileId: 11,
+                MediaFileId: 1,
                 AuthorId: 1,
             })
         }).then(setTimeout(this.refresh, 300));

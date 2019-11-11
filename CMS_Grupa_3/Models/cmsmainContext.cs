@@ -16,11 +16,13 @@ namespace CMS_Grupa_3.Models
         }
 
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<FriendList> FriendList { get; set; }
         public virtual DbSet<MediaFile> MediaFile { get; set; }
         public virtual DbSet<MediaPost> MediaPost { get; set; }
         public virtual DbSet<Msg> Msg { get; set; }
         public virtual DbSet<Sesn> Sesn { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UsersInFl> UsersInFl { get; set; }
         public virtual DbSet<Video> Video { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -56,6 +58,22 @@ namespace CMS_Grupa_3.Models
                     .HasConstraintName("Comment_User");
             });
 
+            modelBuilder.Entity<FriendList>(entity =>
+            {
+                entity.HasKey(e => e.FlId)
+                    .HasName("FriendList_pk");
+
+                entity.Property(e => e.FlId).HasColumnName("FL_id");
+
+                entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+
+                entity.HasOne(d => d.Owner)
+                    .WithMany(p => p.FriendList)
+                    .HasForeignKey(d => d.OwnerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FriendList_User");
+            });
+
             modelBuilder.Entity<MediaFile>(entity =>
             {
                 entity.HasKey(e => e.FileId)
@@ -74,7 +92,6 @@ namespace CMS_Grupa_3.Models
                     .HasMaxLength(30);
 
                 entity.Property(e => e.FileType)
-                    .IsRequired()
                     .HasColumnName("file_type")
                     .HasMaxLength(10);
 
@@ -84,7 +101,6 @@ namespace CMS_Grupa_3.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.MediaDescription)
-                    .IsRequired()
                     .HasColumnName("media_description")
                     .HasMaxLength(100);
 
@@ -94,7 +110,6 @@ namespace CMS_Grupa_3.Models
                     .HasMaxLength(30);
 
                 entity.Property(e => e.MediaType)
-                    .IsRequired()
                     .HasColumnName("media_type")
                     .HasMaxLength(30);
 
@@ -185,16 +200,6 @@ namespace CMS_Grupa_3.Models
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasColumnName("user_name")
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.UserPassword)
-                    .IsRequired()
-                    .HasColumnName("user_password")
-                    .HasMaxLength(30);
-
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Sesn)
                     .HasForeignKey(d => d.UserId)
@@ -230,6 +235,32 @@ namespace CMS_Grupa_3.Models
                 entity.Property(e => e.UserStatus)
                     .HasColumnName("user_status")
                     .HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<UsersInFl>(entity =>
+            {
+                entity.HasKey(e => e.UflId)
+                    .HasName("Users_in_FL_pk");
+
+                entity.ToTable("Users_in_FL");
+
+                entity.Property(e => e.UflId).HasColumnName("UFL_id");
+
+                entity.Property(e => e.FlId).HasColumnName("FL_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Fl)
+                    .WithMany(p => p.UsersInFl)
+                    .HasForeignKey(d => d.FlId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Users_in_FL_FriendList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UsersInFl)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Users_in_FL_User");
             });
 
             modelBuilder.Entity<Video>(entity =>

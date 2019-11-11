@@ -7,7 +7,7 @@ namespace CMS_Grupa_3.Models
     {
         public int PostId { get; set; }
         public string PostHtml { get; set; }
-        public DateTime PostDate { get; set; }
+        public DateTime? PostDate { get; set; }
         public int MediaFileId { get; set; }
         public int AuthorId { get; set; }
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CMS_Grupa_3.Models;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using System.IO;
 
 namespace CMS_Grupa_3.Controllers
 {
@@ -96,14 +97,27 @@ namespace CMS_Grupa_3.Controllers
                 File = new FileDescription(file.FileName,fs)
             };
             var uploadResult = cloudinary.Upload(uploadParams);
-
+            string full_filename = Path.GetFileName(file.FileName);
+            string[] file_parts = full_filename.Split(".");
+            string file_name = file_parts[0];
+            string file_extension = file_parts[1];
             MediaFile mediaFile = new MediaFile();
-            mediaFile.MediaName = "Test";
-            mediaFile.MediaType = "video";
-            mediaFile.MediaDescription = "...";
+            mediaFile.MediaName = file_name;
             mediaFile.MediaDate = DateTime.Now;
-            mediaFile.FileName = "test";
-            mediaFile.FileType = "mp4";
+            mediaFile.FileName = full_filename;
+            mediaFile.FileType = file_extension;
+            if (file_extension == "mp4")
+            mediaFile.MediaType = "video";
+            else if(file_extension =="mp3")
+            mediaFile.MediaType = "video";
+            else
+            mediaFile.MediaType = "other";
+            if (model.Desctiption !=null)
+            {
+                mediaFile.MediaDescription = model.Desctiption;
+            }
+            else
+                mediaFile.MediaDescription = "...";
             mediaFile.FileLink= uploadResult.Uri.ToString();
             var u = await _context.User.SingleOrDefaultAsync(u => u.UserName == "admin");
             mediaFile.Uploader = u;

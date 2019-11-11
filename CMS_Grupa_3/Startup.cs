@@ -35,7 +35,7 @@ namespace CMS_Grupa_3
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
+            //Scaffold-DbContext "Server=tcp:cms-grupa-3.database.windows.net,1433;Initial Catalog=cms-main;User ID=cms_admin;Password=useruser0!;MultipleActiveResultSets =False;Encrypt=True;TrustServerCertificate=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f
             var connection = "Server=tcp:cms-grupa-3.database.windows.net,1433;Initial Catalog=cms-main;User ID=cms_admin;Password=useruser0!;MultipleActiveResultSets =False;Encrypt=True;TrustServerCertificate=False;";
             services.AddDbContext<cmsmainContext>(options => options.UseSqlServer(connection));
 
