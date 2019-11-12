@@ -12,8 +12,9 @@ import Show_Post from './components/Show_Post';
 import Test from './components/Test';
 import SignUp from './components/SignUp';
 
+import './themes/bootstrap_flat.css';
 
-export default () => ( 
+export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/login' component={Login} />

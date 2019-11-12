@@ -7,7 +7,7 @@ namespace CMS_Grupa_3.Models
     {
         public int CommentId { get; set; }
         public string CommentHtml { get; set; }
-        public DateTime CommentDate { get; set; }
+        public DateTime? CommentDate { get; set; }
         public int AuthorId { get; set; }
 
         public virtual User Author { get; set; }

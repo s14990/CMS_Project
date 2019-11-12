@@ -23,14 +23,15 @@ class Upload_Video extends Component {
             });
         };
 
-    uploadHandler = () => {
+    uploadHandler = async() => {
         let f = new FormData();
         f.append('File', this.state.selectedFile);
-        axios.post('api/MediaFiles', f,{
+        f.append('Desctiption', "TestTestTest");
+        var resp = await axios.post('api/MediaFiles', f, {
             headers: { 'Content-Type': 'multipart/form-data' }
-        }).
-        then(alert("File upload completed"));
-        
+        });
+        console.log(resp);
+        window.alert("File upload completed");
     }
 
 

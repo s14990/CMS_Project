@@ -14,5 +14,9 @@ namespace CMS_Grupa_3.Models
         public int Width { get; set; }
         public int Height { get; set; }
         public string Extension { get; set; }
+
+        public string Desctiption { get; set; }
+
+        public int Author { get; set; }
     }
 }

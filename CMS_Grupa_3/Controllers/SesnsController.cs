@@ -77,19 +77,20 @@ namespace CMS_Grupa_3.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Sesn>> PostSesn(Sesn sesn)
+        public async Task<ActionResult<Sesn>> PostSesn(UserLogin login)
         {
 
-            var user = await _context.User.SingleOrDefaultAsync(u => u.UserName == sesn.UserName);
+            var user = await _context.User.SingleOrDefaultAsync(u => u.UserName == login.UserName);
             if (user == null)
             {
                 return BadRequest(new { errors = "No user was found" });
             }
-            if (user.UserPassword != sesn.UserPassword)
+            if (user.UserPassword != login.UserPassword)
             {
                 return BadRequest(new { errors = "Wrong Password" });
             }
-
+            Sesn sesn = new Sesn();
+            sesn.StartDate = DateTime.Now;
             sesn.User = user;
             _context.Sesn.Add(sesn);
 
