@@ -13,16 +13,17 @@ function ModeLayout(props) {
         <button onClick={() => setDarkMode(prevMode => !prevMode)}>Toggle Mode</button>
       </div>
       <NavMenu className = {darkMode? 'dark-mode': 'light-mode'}/>
-      <Container>
-        {props.children}
-      </Container>
+      
     </div>
   );
 }
 
 export default props => (
-
+    <div>
     <ModeLayout props = {props}/>
-
+    <Container>
+        {props.children}
+    </Container>
+    </div>
 
 );

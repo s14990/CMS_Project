@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ThemeSwitcher from './ThemeSwitcher';
+import MessageList from './MessageList';
+
 
 class Test extends Component {
 
@@ -20,10 +22,13 @@ class Test extends Component {
     render() {
         return (
             <div>
+            {/*   <ThemeSwitcher/>
+                <h2>Text: {this.state.text} , number: {this.state.number}</h2>
+                <button onClick={this.testHandler}>Counter</button>
+            */}
+                <MessageList/>
 
-              <h2>Text: {this.state.text} , number: {this.state.number}</h2>
-              <button onClick={this.testHandler}>Upload</button>
-              <p><ThemeSwitcher/></p>
+              
             </div>
         );
     }

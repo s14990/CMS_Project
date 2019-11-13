@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Jumbotron} from 'reactstrap';
 
 class Show_Post extends Component {
 
@@ -14,8 +14,10 @@ class Show_Post extends Component {
     render() {
         return (
             <div>
-                <h1>Post_Id: {this.props.post.postId}</h1> 
+                <Jumbotron className='jumbotron bg-light'>
+                    <h1>Post_Id: {this.props.post.postId}</h1> 
                     <div dangerouslySetInnerHTML={{ __html: this.props.post.postHtml }}></div>
+                </Jumbotron>
             </div>
         );
     }
