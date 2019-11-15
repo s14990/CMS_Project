@@ -9,6 +9,7 @@ namespace CMS_Grupa_3.Models
         {
             Comment = new HashSet<Comment>();
             FriendList = new HashSet<FriendList>();
+            Likes = new HashSet<Likes>();
             MediaFile = new HashSet<MediaFile>();
             MediaPost = new HashSet<MediaPost>();
             MsgAutor = new HashSet<Msg>();
@@ -27,6 +28,7 @@ namespace CMS_Grupa_3.Models
 
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<FriendList> FriendList { get; set; }
+        public virtual ICollection<Likes> Likes { get; set; }
         public virtual ICollection<MediaFile> MediaFile { get; set; }
         public virtual ICollection<MediaPost> MediaPost { get; set; }
         public virtual ICollection<Msg> MsgAutor { get; set; }

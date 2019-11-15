@@ -13,9 +13,9 @@ namespace CMS_Grupa_3.Controllers
     [ApiController]
     public class CommentsController : ControllerBase
     {
-        private readonly cmsmainContext _context;
+        private readonly CrossMusicContext _context;
 
-        public CommentsController(cmsmainContext context)
+        public CommentsController(CrossMusicContext context)
         {
             _context = context;
         }

@@ -13,9 +13,9 @@ namespace CMS_Grupa_3.Controllers
     [ApiController]
     public class MsgsController : ControllerBase
     {
-        private readonly cmsmainContext _context;
+        private readonly CrossMusicContext _context;
 
-        public MsgsController(cmsmainContext context)
+        public MsgsController(CrossMusicContext context)
         {
             _context = context;
         }

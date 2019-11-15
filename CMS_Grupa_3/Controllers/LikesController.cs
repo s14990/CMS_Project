@@ -11,48 +11,48 @@ namespace CMS_Grupa_3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class LikesController : ControllerBase
     {
         private readonly CrossMusicContext _context;
 
-        public UsersController(CrossMusicContext context)
+        public LikesController(CrossMusicContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Likes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Likes>>> GetLikes()
         {
-            return await _context.User.ToListAsync();
+            return await _context.Likes.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Likes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Likes>> GetLikes(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var likes = await _context.Likes.FindAsync(id);
 
-            if (user == null)
+            if (likes == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return likes;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Likes/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutLikes(int id, Likes likes)
         {
-            if (id != user.UserId)
+            if (id != likes.LikeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(likes).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CMS_Grupa_3.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!LikesExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace CMS_Grupa_3.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Likes
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Likes>> PostLikes(Likes likes)
         {
-            _context.User.Add(user);
+            _context.Likes.Add(likes);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetLikes", new { id = likes.LikeId }, likes);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Likes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Likes>> DeleteLikes(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var likes = await _context.Likes.FindAsync(id);
+            if (likes == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.Likes.Remove(likes);
             await _context.SaveChangesAsync();
 
-            return user;
+            return likes;
         }
 
-        private bool UserExists(int id)
+        private bool LikesExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.Likes.Any(e => e.LikeId == id);
         }
     }
 }

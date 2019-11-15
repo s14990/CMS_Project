@@ -13,9 +13,9 @@ namespace CMS_Grupa_3.Controllers
     [ApiController]
     public class SesnsController : ControllerBase
     {
-        private readonly cmsmainContext _context;
+        private readonly CrossMusicContext _context;
 
-        public SesnsController(cmsmainContext context)
+        public SesnsController(CrossMusicContext context)
         {
             _context = context;
         }

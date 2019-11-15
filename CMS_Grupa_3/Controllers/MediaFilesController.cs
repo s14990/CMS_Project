@@ -16,9 +16,9 @@ namespace CMS_Grupa_3.Controllers
     [ApiController]
     public class MediaFilesController : ControllerBase
     {
-        private readonly cmsmainContext _context;
+        private readonly CrossMusicContext _context;
 
-        public MediaFilesController(cmsmainContext context)
+        public MediaFilesController(CrossMusicContext context)
         {
             _context = context;
         }

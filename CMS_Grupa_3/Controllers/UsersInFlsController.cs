@@ -11,48 +11,48 @@ namespace CMS_Grupa_3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersInFlsController : ControllerBase
     {
         private readonly CrossMusicContext _context;
 
-        public UsersController(CrossMusicContext context)
+        public UsersInFlsController(CrossMusicContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/UsersInFls
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<UsersInFl>>> GetUsersInFl()
         {
-            return await _context.User.ToListAsync();
+            return await _context.UsersInFl.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/UsersInFls/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UsersInFl>> GetUsersInFl(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var usersInFl = await _context.UsersInFl.FindAsync(id);
 
-            if (user == null)
+            if (usersInFl == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return usersInFl;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/UsersInFls/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUsersInFl(int id, UsersInFl usersInFl)
         {
-            if (id != user.UserId)
+            if (id != usersInFl.UflId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(usersInFl).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CMS_Grupa_3.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UsersInFlExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace CMS_Grupa_3.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/UsersInFls
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<UsersInFl>> PostUsersInFl(UsersInFl usersInFl)
         {
-            _context.User.Add(user);
+            _context.UsersInFl.Add(usersInFl);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUsersInFl", new { id = usersInFl.UflId }, usersInFl);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/UsersInFls/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<UsersInFl>> DeleteUsersInFl(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var usersInFl = await _context.UsersInFl.FindAsync(id);
+            if (usersInFl == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.UsersInFl.Remove(usersInFl);
             await _context.SaveChangesAsync();
 
-            return user;
+            return usersInFl;
         }
 
-        private bool UserExists(int id)
+        private bool UsersInFlExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.UsersInFl.Any(e => e.UflId == id);
         }
     }
 }

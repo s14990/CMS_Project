@@ -11,48 +11,48 @@ namespace CMS_Grupa_3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class FriendListsController : ControllerBase
     {
         private readonly CrossMusicContext _context;
 
-        public UsersController(CrossMusicContext context)
+        public FriendListsController(CrossMusicContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/FriendLists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<FriendList>>> GetFriendList()
         {
-            return await _context.User.ToListAsync();
+            return await _context.FriendList.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/FriendLists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<FriendList>> GetFriendList(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var friendList = await _context.FriendList.FindAsync(id);
 
-            if (user == null)
+            if (friendList == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return friendList;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/FriendLists/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutFriendList(int id, FriendList friendList)
         {
-            if (id != user.UserId)
+            if (id != friendList.FlId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(friendList).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CMS_Grupa_3.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!FriendListExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace CMS_Grupa_3.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/FriendLists
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<FriendList>> PostFriendList(FriendList friendList)
         {
-            _context.User.Add(user);
+            _context.FriendList.Add(friendList);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetFriendList", new { id = friendList.FlId }, friendList);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/FriendLists/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<FriendList>> DeleteFriendList(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var friendList = await _context.FriendList.FindAsync(id);
+            if (friendList == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.FriendList.Remove(friendList);
             await _context.SaveChangesAsync();
 
-            return user;
+            return friendList;
         }
 
-        private bool UserExists(int id)
+        private bool FriendListExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.FriendList.Any(e => e.FlId == id);
         }
     }
 }

@@ -4,33 +4,33 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CMS_Grupa_3.Models
 {
-    public partial class cmsmainContext : DbContext
+    public partial class CrossMusicContext : DbContext
     {
-        public cmsmainContext()
+        public CrossMusicContext()
         {
         }
 
-        public cmsmainContext(DbContextOptions<cmsmainContext> options)
+        public CrossMusicContext(DbContextOptions<CrossMusicContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<FriendList> FriendList { get; set; }
+        public virtual DbSet<Likes> Likes { get; set; }
         public virtual DbSet<MediaFile> MediaFile { get; set; }
         public virtual DbSet<MediaPost> MediaPost { get; set; }
         public virtual DbSet<Msg> Msg { get; set; }
         public virtual DbSet<Sesn> Sesn { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UsersInFl> UsersInFl { get; set; }
-        public virtual DbSet<Video> Video { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:cms-grupa-3.database.windows.net,1433;Initial Catalog=cms-main;User ID=cms_admin;Password=useruser0!;MultipleActiveResultSets =False;Encrypt=True;TrustServerCertificate=False;");
+                optionsBuilder.UseSqlServer("Server=tcp:cmsproject.database.windows.net,1433;Initial Catalog=CrossMusic;User ID=cmsAdmin;Password=2019CMS_Project;MultipleActiveResultSets =False;Encrypt=True;TrustServerCertificate=False;");
             }
         }
 
@@ -63,7 +63,7 @@ namespace CMS_Grupa_3.Models
                 entity.HasKey(e => e.FlId)
                     .HasName("FriendList_pk");
 
-                entity.Property(e => e.FlId).HasColumnName("FL_id");
+                entity.Property(e => e.FlId).HasColumnName("fl_id");
 
                 entity.Property(e => e.OwnerId).HasColumnName("owner_id");
 
@@ -72,6 +72,30 @@ namespace CMS_Grupa_3.Models
                     .HasForeignKey(d => d.OwnerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FriendList_User");
+            });
+
+            modelBuilder.Entity<Likes>(entity =>
+            {
+                entity.HasKey(e => e.LikeId)
+                    .HasName("Likes_pk");
+
+                entity.Property(e => e.LikeId).HasColumnName("like_id");
+
+                entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Likes_MediaPost");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Likes_User");
             });
 
             modelBuilder.Entity<MediaFile>(entity =>
@@ -165,6 +189,10 @@ namespace CMS_Grupa_3.Models
 
                 entity.Property(e => e.AutorId).HasColumnName("autor_id");
 
+                entity.Property(e => e.MsgDate)
+                    .HasColumnName("msg_date")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.TargetId).HasColumnName("target_id");
 
                 entity.Property(e => e.Text)
@@ -244,9 +272,11 @@ namespace CMS_Grupa_3.Models
 
                 entity.ToTable("Users_in_FL");
 
-                entity.Property(e => e.UflId).HasColumnName("UFL_id");
+                entity.Property(e => e.UflId).HasColumnName("ufl_id");
 
-                entity.Property(e => e.FlId).HasColumnName("FL_id");
+                entity.Property(e => e.FlId).HasColumnName("fl_id");
+
+                entity.Property(e => e.FlStatus).HasColumnName("fl_status");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -261,24 +291,6 @@ namespace CMS_Grupa_3.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Users_in_FL_User");
-            });
-
-            modelBuilder.Entity<Video>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Format)
-                    .HasColumnName("format")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.VideoLink)
-                    .HasColumnName("video_link")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.VideoName)
-                    .HasColumnName("video_name")
-                    .HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);

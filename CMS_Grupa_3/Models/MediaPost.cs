@@ -5,6 +5,11 @@ namespace CMS_Grupa_3.Models
 {
     public partial class MediaPost
     {
+        public MediaPost()
+        {
+            Likes = new HashSet<Likes>();
+        }
+
         public int PostId { get; set; }
         public string PostHtml { get; set; }
         public DateTime? PostDate { get; set; }
@@ -13,5 +18,6 @@ namespace CMS_Grupa_3.Models
 
         public virtual User Author { get; set; }
         public virtual MediaFile MediaFile { get; set; }
+        public virtual ICollection<Likes> Likes { get; set; }
     }
 }
